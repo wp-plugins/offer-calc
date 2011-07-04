@@ -28,7 +28,7 @@ class OfferCalc {
 	private $adminOptionsName = "Offer Calc";
 	private $version = '0.5a';
 
-	public function OfferCalc($options) {
+	public function OfferCalc($options=NULL) {
 		// constructor
 		// to be updated in the future
 		wp_enqueue_script('jquery');
