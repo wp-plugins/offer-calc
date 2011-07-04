@@ -23,7 +23,11 @@
 		// extract the ID as number
 		var id = this.id.substring(this.id.lastIndexOf('_') + 1);
 		// sum the row price
-		var row_sum = parseFloat(jQuery("#offer_price_" + id).text()) * parseFloat(jQuery("#offer_count_" + id).val());
+		
+		var offer_price = jQuery("#offer_price_" + id).text();
+		var offer_count = jQuery("#offer_count_" + id).val();
+		
+		var row_sum = parseFloat(offer_price) * parseFloat(offer_count);
 
 		jQuery("#offer_sum_" + id).val(row_sum);
 
