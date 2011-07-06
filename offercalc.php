@@ -110,7 +110,7 @@ class OfferCalc {
 	/**
 	 * Function registering the shortcode via the widget
 	 */
-	private function register_shortcode() {
+	private function register_shortcode() {	
 			include_once('shortcode.php');
 	}
 }

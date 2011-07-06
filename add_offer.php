@@ -12,7 +12,7 @@ if(isset($_GET['offer_id']) && isset($_GET['action_type']) && $_GET['action_type
 	$offer_id = $_GET['offer_id'];
 	global $wpdb;
 	
-	$offer_data = $wpdb->get_row('SELECT * FROM offercalc_offers WHERE offer_id = '. $offer_id);
+	$offer_data = $wpdb->get_row('SELECT * FROM offercalc_offers WHERE id = '. $offer_id);
 	
 	if($wpdb->num_rows == 0) {
 		echo "Wrong ID supplied. "; 
@@ -65,6 +65,9 @@ if(isset($_GET['offer_id']) && isset($_GET['action_type']) && $_GET['action_type
 	<?php endif; ?>
 	</table>
 
+	<?php if($form_action == 'edit'):?>
+		<input type="hidden" name="offer_id" value="<?php echo $offer_id; ?>" />
+	<?php endif; ?>
 	<input type="hidden" name="form_action" value="<?php echo $form_action; ?>" />
 	<input type="submit" value="Submit form" />	
 </form>
