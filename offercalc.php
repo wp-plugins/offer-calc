@@ -58,9 +58,8 @@ class OfferCalc {
 	 *  
 	 */
 	private function addCSSdeps() {
-		wp_enqueue_style('offercalc', plugins_url('offercalc.css', __FILE__), '1.0', 'screen');
-		wp_register_style('offercalc');
-		
+		wp_register_style('offercalc', plugins_url('offercalc.css', __FILE__), array(), '1.0', 'screen');
+		wp_enqueue_style('offercalc');
 	}
 	
 	/**
