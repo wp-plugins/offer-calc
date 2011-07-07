@@ -1,9 +1,9 @@
 === Offer Calc ===
-Contributors: nofearinc, mpeshev
+Contributors: nofearinc
 Tags: offers, calculator
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 0.5
+Stable tag: 0.6
 License: GPLv2 or later
 
 Offer Calc is a simple plugin letting your site visitors to calculate your services at final cost. 
@@ -19,12 +19,12 @@ Offer Calc is a simple plugin letting your site visitors to calculate your servi
 
 Features in the queue for future releases:
 
--select the type of the input 
--limit the input based on the service
--configure the layout of each row
--style it.
--working edit/delete of forms
--working with more than 1 widget/shortcode at a page (currently using IDs at some places)
+* select the type of the input 
+* limit the input based on the service
+* configure the layout of each row
+* style it.
+* working edit/delete of forms
+* working with more than 1 widget/shortcode at a page (currently using IDs at some places)
 
 == Installation ==
 
