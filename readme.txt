@@ -1,4 +1,4 @@
-=== Offer Calc ===
+﻿=== Offer Calc ===
 Contributors: nofearinc
 Tags: offers, calculator
 Requires at least: 3.0
@@ -46,7 +46,6 @@ Fixing the shortcodes - new way of calling the shortcode in your post/page!
 Enqueue stylesheet/js instead of inline
 Name convention change
 Using unique identifiers and classes for widgets (duplicates now theoretically possible)
-
 
 v0.5a
 Widget and Shortcode
