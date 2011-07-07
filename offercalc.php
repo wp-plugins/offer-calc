@@ -30,13 +30,38 @@ class OfferCalc {
 
 	public function OfferCalc($options=NULL) {
 		// constructor
-		// to be updated in the future
-		wp_enqueue_script('jquery');
+
+		$this->addJSdeps();
+		$this->addCSSdeps();
+		// run plugin specific data
 		$this->createDB();	
 		$this->register_widget();
 		$this->register_shortcode();
 	}
 
+	/**
+	 * Add Javascripts required for the plugin to work
+	 * Both admin and backend (could be separated in future)
+	 * 
+	 */
+	private function addJSdeps() {
+		wp_enqueue_script('jquery');
+		// load custom JSes and put them in footer
+		wp_register_script('offercalc', plugins_url( 'offercalc.js' , __FILE__ ), array('jquery'), '1.0', true);
+		wp_enqueue_script('offercalc');
+	}
+	
+	/**
+	 * Add CSS styling for the plugin
+	 * for both admin and backend 
+	 *  
+	 */
+	private function addCSSdeps() {
+		wp_enqueue_style('offercalc', plugins_url('offercalc.css', __FILE__), '1.0', 'screen');
+		wp_register_style('offercalc');
+		
+	}
+	
 	/**
 	 * 
 	 * Creates tables for offer calculators

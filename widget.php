@@ -23,17 +23,18 @@ class OfferCalc_Widget extends WP_Widget {
 	}
 
 	private function outputWidget($args, $instance) {
-		$form_id = $instance['form_id'];
+		$offer_slug = $instance['offer_slug'];
 		
 		global $wpdb;
-		$fields = $wpdb->get_results("SELECT * FROM offercalc_fields where offer_slug = '$form_id';");
+		$fields = $wpdb->get_results("SELECT * FROM offercalc_fields where offer_slug = '$offer_slug';");
 
+		$widget_id = $this->number;
 		include_once('widget_view.tpl');
 	}
 	
 	function update($new_instance, $old_instance) {
 		$instance = $old_instance;
-		$instance['form_id'] = strip_tags($new_instance['form_id']);
+		$instance['offer_slug'] = strip_tags($new_instance['offer_slug']);
         return $instance;
     }
 	
@@ -41,13 +42,13 @@ class OfferCalc_Widget extends WP_Widget {
 	function form( $instance ) {
 
 		/* Set up some default widget settings. */
-		$defaults = array( 'form_id' => 'Form Slug ID');
+		$defaults = array( 'offer_slug' => 'Offer Slug');
 		$instance = wp_parse_args( (array) $instance, $defaults ); 
 		
 	?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'form_id' ); ?>">Form ID:</label>
-			<input id="<?php echo $this->get_field_id( 'form_id' ); ?>" name="<?php echo $this->get_field_name( 'form_id' ); ?>" value="<?php echo $instance['form_id']; ?>" style="width:100%;" />
+			<label for="<?php echo $this->get_field_id( 'offer_slug' ); ?>">Offer slug:</label>
+			<input id="<?php echo $this->get_field_id( 'offer_slug' ); ?>" name="<?php echo $this->get_field_name( 'offer_slug' ); ?>" value="<?php echo $instance['offer_slug']; ?>" style="width:100%;" />
 		</p>
 
 	<?php 

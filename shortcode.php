@@ -12,7 +12,7 @@
 function ofc_shortcode($atts) {
     ob_start();
     $widget_name = 'OfferCalc_Widget';
-    $instance['form_id'] = $atts['form_id'];
+    $instance['offer_slug'] = $atts['offer_slug'];
     the_widget($widget_name, $instance, array(
         'before_widget' => '',
         'after_widget' => '',
