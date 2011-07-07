@@ -4,6 +4,7 @@
  Plugin URI: http://devrix.com/offercalc
  Description: Offer Calc is a simple plugin letting your site visitors to calculate your services at final cost.
  Version: 0.6
+ Stable tag: 0.6
  Author: mpeshev
  Author URI: http://freelancer.peshev.net
  License: GPL2
