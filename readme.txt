@@ -2,15 +2,15 @@
 Contributors: nofearinc
 Tags: offers, calculator
 Requires at least: 3.0
-Tested up to: 3.2
-Stable tag: 0.6
+Tested up to: 3.4.1
+Stable tag: 0.8
 License: GPLv2 or later
 
 Offer Calc is a simple plugin letting your site visitors to calculate your services at final cost. 
 
 == Description ==
 
-Offer Calc is a simple plugin letting your site visitors to calculate your services at final cost. The layout includes number of rows, each one consists of:
+Offer Calc is a simple plugin letting your site visitors to calculate your services at final cost. Place the calc in a page or in the widget area. The layout includes number of rows, each one consists of:
 * service name/description
 * price per unit
 * input box for clients to select number of units (number of pages, number of apples etc)
@@ -23,8 +23,6 @@ Features in the queue for future releases:
 * limit the input based on the service
 * configure the layout of each row
 * style it.
-* working edit/delete of forms
-* working with more than 1 widget/shortcode at a page (currently using IDs at some places)
 
 == Installation ==
 
@@ -39,6 +37,10 @@ If you need a shortcode usage, use this snippet:
 Currently only 1 form is supported on the site.
 
 == Changelog ==
+
+v0.8
+Several small bug fixes
+Allows for multiple forms on a site
 
 v0.6
 Adding edit/delete (finally!)

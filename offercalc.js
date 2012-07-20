@@ -17,7 +17,7 @@
 	
 			// count total sum
 			var total_sum = 0;
-			jQuery(".offer_sum").each(function() {
+			jQuery("#widget_offercalc_table_" + widget_id + " .offer_sum").each(function() {
 				total_sum += parseFloat(jQuery(this).val());
 			}); 
 	

@@ -13,6 +13,10 @@ class OfferCalc_Widget extends WP_Widget {
 	}
 
 	public function widget( $args, $instance ) {
+// 		$args = wp_parse_args($args, array(
+// 								'before_widget' => '<div id="%1$s" class="%2$s offercalc_wrapper">',
+// 								'after_widget' => '</div>',
+// 							));
 		extract( $args );
 			
 		echo $before_widget;
@@ -28,8 +32,17 @@ class OfferCalc_Widget extends WP_Widget {
 		global $wpdb;
 		$fields = $wpdb->get_results("SELECT * FROM offercalc_fields where offer_slug = '$offer_slug';");
 
-		$widget_id = $this->number;
-		include_once('widget_view.tpl');
+		$widget_id = $this->id;
+		
+		if(isset($instance['shortcode_widget_id'])) {
+			$widget_id = $instance['shortcode_widget_id'];
+		}
+		
+// 		$widget_id = $this->number;
+// 		if(!$this->number || $this->number < 1) {
+// 			$widget_id = $this->id;
+// 		}
+		include('widget_view.tpl');
 	}
 	
 	function update($new_instance, $old_instance) {
