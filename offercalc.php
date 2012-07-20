@@ -27,7 +27,7 @@
 
 class OfferCalc {
 	private $adminOptionsName = "Offer Calc";
-	private $version = '0.6';
+	private $version = '0.8';
 
 	public function OfferCalc($options=NULL) {
 		// constructor
