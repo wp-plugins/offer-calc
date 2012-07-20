@@ -1,0 +1,37 @@
+/* Offer Calc CSS stylesheet */
+
+/* Styling the frontend table in a widget. Sidebar widgets only. */
+
+.widget-container.offercalc_widget input {
+	width: 40px;
+	height: 20px;	
+}
+
+ul li table.widget_offercalc_table {
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: separate;
+	background-color: white;
+}
+ul li table.widget_offercalc_table th {
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	-moz-border-radius: ;
+}
+ul li table.widget_offercalc_table td {
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	-moz-border-radius: ;
+}
+
+div.offercalc_wrapper div.total_offercalc_sum {
+	font-weight: bold;	
+}
