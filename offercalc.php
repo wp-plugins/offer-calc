@@ -32,8 +32,10 @@ class OfferCalc {
 	public function OfferCalc($options=NULL) {
 		// constructor
 
-		$this->addJSdeps();
-		$this->addCSSdeps();
+		add_action('wp_enqueue_scripts', array($this, 'addJSdeps'));
+		add_action('wp_enqueue_scripts', array($this, 'addCSSdeps'));
+		// $this->addJSdeps();
+		// $this->addCSSdeps();
 		// run plugin specific data
 		$this->createDB();	
 		$this->register_widget();
@@ -45,7 +47,7 @@ class OfferCalc {
 	 * Both admin and backend (could be separated in future)
 	 * 
 	 */
-	private function addJSdeps() {
+	public function addJSdeps() {
 		wp_enqueue_script('jquery');
 		// load custom JSes and put them in footer
 		wp_register_script('offercalc', plugins_url( 'offercalc.js' , __FILE__ ), array('jquery'), '1.0', true);
@@ -57,7 +59,7 @@ class OfferCalc {
 	 * for both admin and backend 
 	 *  
 	 */
-	private function addCSSdeps() {
+	public function addCSSdeps() {
 		wp_register_style('offercalc', plugins_url('offercalc.css', __FILE__), array(), '1.0', 'screen');
 		wp_enqueue_style('offercalc');
 	}
