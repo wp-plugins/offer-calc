@@ -1,147 +1,192 @@
 <?php
 /*
- Plugin Name: Offer Calc
- Plugin URI: http://devrix.com/offercalc
- Description: Offer Calc is a simple plugin letting your site visitors to calculate your services at final cost.
- Version: 0.8
- Stable tag: 0.8
- Author: mpeshev
- Author URI: http://freelancer.peshev.net
- License: GPL2
-
- Copyright 2011 mpeshev (email : mpeshev@devrix.com)
-
+ * Plugin Name: Offer Calc
+ * Plugin URI: http://offercalc.com/
+ * Description: Offer Calc is a simple plugin letting your site visitors to calculate your services at final cost.
+ * Version: 1.0
+ * Stable tag: 1.0
+ * Author: DevriX
+ * Author URI: http://devrix.com
+ * License: GPL2
+ 
+ Copyright 2014 DevriX (email : mpeshev@devrix.com)
+ 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License, version 2, as
  published by the Free Software Foundation.
-
+ 
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
-
+ 
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-class OfferCalc {
-	private $adminOptionsName = "Offer Calc";
-	private $version = '0.8';
+/**
+ * Define Some needed predefined variables
+ * 
+ * @package Offer Calc
+ * @since 0.8
+ * 
+ */
 
-	public function OfferCalc($options=NULL) {
-		// constructor
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
 
-		add_action('wp_enqueue_scripts', array($this, 'addJSdeps'));
-		add_action('wp_enqueue_scripts', array($this, 'addCSSdeps'));
-		// $this->addJSdeps();
-		// $this->addCSSdeps();
-		// run plugin specific data
-		$this->createDB();	
-		$this->register_widget();
-		$this->register_shortcode();
-	}
-
-	/**
-	 * Add Javascripts required for the plugin to work
-	 * Both admin and backend (could be separated in future)
-	 * 
-	 */
-	public function addJSdeps() {
-		wp_enqueue_script('jquery');
-		// load custom JSes and put them in footer
-		wp_register_script('offercalc', plugins_url( 'offercalc.js' , __FILE__ ), array('jquery'), '1.0', true);
-		wp_enqueue_script('offercalc');
-	}
-	
-	/**
-	 * Add CSS styling for the plugin
-	 * for both admin and backend 
-	 *  
-	 */
-	public function addCSSdeps() {
-		wp_register_style('offercalc', plugins_url('offercalc.css', __FILE__), array(), '1.0', 'screen');
-		wp_enqueue_style('offercalc');
-	}
-	
-	/**
-	 * 
-	 * Creates tables for offer calculators
-	 */
-	private function createDB() {
-		if(get_option('ofc_version') != $this->version) {
-			global $wpdb;
-			
-			$sql_offers = "CREATE TABLE `offercalc_offers` (
-				id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-				name VARCHAR(255) NOT NULL,
-				slug VARCHAR(255) NOT NULL UNIQUE,
-				number_fields int NOT NULL
-			);";
-			
-			$sql_items = "CREATE TABLE `offercalc_fields` (
-				id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-				name VARCHAR(255) NOT NULL,
-				price double NOT NULL,
-				offer_slug VARCHAR(255) NOT NULL
-			);";
-			
-			$wpdb->query($sql_offers);
-			$wpdb->query($sql_items);
-			$wpdb->flush();
-
-			update_option('ofc_version', $this->version);
-		}
-	}
-	
-	/**
-	 * Function for admin panel behavior
-	 */
-	public function add_admin() {
-		add_menu_page('Offer Calc', 'Offer Calc', 'edit_themes', 'offer-calc', array(&$this, 'offercalc_list'), '', 45);		
-		add_submenu_page( 'offer-calc', 'Add Offer', 'Add Offer', 'edit_themes', 'add-offer', array(&$this, 'offercalc_options'));
-	}
-
-	/**
-	 * Load options in the admin
-	 */
-	public function offercalc_options() {
-		if (!current_user_can('manage_options'))  {
-			wp_die( __('You do not have sufficient permissions to access this page.') );
-		}
-		
-		include_once('add_offer.php');
-	}
-	
-	/**
-	 * 
-	 * Listing. 
-	 */
-	public function offercalc_list() {
-		if (!current_user_can('manage_options'))  {
-			wp_die( __('You do not have sufficient permissions to access this page.') );
-		}
-		
-		include_once('offer_list.php');
-	}
-
-
-	/**
-	 * Function registering the widget
-	 */
-	private function register_widget() {
-			include_once('widget.php');
-	}
-	
-
-	/**
-	 * Function registering the shortcode via the widget
-	 */
-	private function register_shortcode() {	
-			include_once('shortcode.php');
-	}
+if ( ! defined( 'OFFER_CALC_DIR' ) ) {
+	define( 'OFFER_CALC_DIR', dirname( __FILE__ ) ); // plugin dir
 }
-$offerCalc = new OfferCalc();
 
-add_action( 'admin_menu', array(&$offerCalc, 'add_admin') );
+if ( ! defined( 'OFFER_CALC_URL' ) ) {
+	define( 'OFFER_CALC_URL', plugin_dir_url( __FILE__ ) ); // plugin url
+}
 
+if ( ! defined( 'OFFER_CALC_POST_TYPE' ) ) {
+	define( 'OFFER_CALC_POST_TYPE', 'offer-calc' );
+}
+
+if( ! defined( 'OFFER_CALC_METABOX_DIR' ) ) {
+	define( 'OFFER_CALC_METABOX_DIR', OFFER_CALC_DIR . '/includes/meta-boxes' ); // meta-boxes url
+}
+
+if( ! defined( 'OFFER_CALC_METABOX_URL' ) ) {
+	define( 'OFFER_CALC_METABOX_URL', OFFER_CALC_URL . '/includes/meta-boxes' ); // meta-boxes url
+}
+
+if( ! defined( 'OFFER_CALC_ADMIN' ) ) {
+	define( 'OFFER_CALC_ADMIN', OFFER_CALC_DIR . '/includes/admin' ); // plugin admin dir
+}
+
+if( ! defined( 'OFFER_CALC_META_PREFIX' ) ) {
+	define( 'OFFER_CALC_META_PREFIX', '_offercalc_' ); // plugin meta prefix
+}
+
+if ( ! defined( 'OFFER_CALC_ADMIN_HELP_PAGE_URL' ) ) {
+	define( 'OFFER_CALC_ADMIN_HELP_PAGE_URL', admin_url( 'edit.php?post_type=offer-calc&page=offer-calc-help' ) );
+}
+
+if ( ! defined( 'OFFER_CALC_PRO_SITE_URL' ) ) {
+	define( 'OFFER_CALC_PRO_SITE_URL', 'http://offercalc.com?ref=offer-calc-plugin' ); // Offer Calc Pro version URL
+}
+
+/**
+ * Load Text Domain
+ * 
+ * This gets the plugin ready for translation.
+ * 
+ * @package Offer Calc
+ * @since 1.0.0
+ * 
+ */
+
+function offer_calc_load_textdomain() {
+	
+  load_plugin_textdomain( 'offercalc', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+  
+}
+
+add_action( 'init', 'offer_calc_load_textdomain' );
+
+/**
+ * Plugin Activation hook
+ * 
+ * This hook will call when plugin will activate
+ * 
+ * @package Offer Calc
+ * @since 1.0.0
+ * 
+ */	
+		
+register_activation_hook(  __FILE__, 'offer_calc_install' );
+
+function offer_calc_install() {
+	
+	global $wpdb;
+	
+	update_option( 'ofc_pro_notice', 1 );
+	$version = get_option( 'ofc_version' );
+	if( ! $version ) {
+		update_option( 'ofc_version', 1 );
+		update_option( 'ofc_migration_done', true );
+	}
+	//register custom post type
+	offer_calc_register_post_types();	
+		
+	//IMP Call of Function
+	//Need to call when custom post type is being used in plugin
+	flush_rewrite_rules();	
+}
+
+/**
+ * Plugin Deactivation hook
+ * 
+ * This hook will call when plugin will deactivate
+ * 
+ * @package Offer Calc
+ * @since 1.0.0
+ * 
+ */
+
+register_deactivation_hook( __FILE__, 'offer_calc_uninstall' );
+
+function offer_calc_uninstall() {
+	
+	global $wpdb;
+	
+}
+
+/**
+ * Includes Class Files
+ * 
+ * @package Offer Calc
+ * @since 1.0.0
+ */
+global $offer_calc_model,$offer_calc_scripts,$offer_calc_admin,$offer_calc_shortcodes;
+
+/**
+ * Includes Class Files
+ * 
+ * @package Offer Calc
+ * @since 1.0.0
+ * 
+ */
+
+//includes model file
+include_once( OFFER_CALC_DIR . '/includes/class-offer-calc-model.php');
+$offer_calc_model = new Offer_Calc_Model;
+
+//includes script file
+include_once( OFFER_CALC_DIR . '/includes/class-offer-calc-scripts.php');
+$offer_calc_scripts = new Offer_Calc_Scripts;
+$offer_calc_scripts->add_hooks();
+
+//includes post types file
+include_once( OFFER_CALC_DIR . '/includes/dx-offer-calc-post-types.php');
+
+//includes widget file
+require_once ( OFFER_CALC_DIR . '/includes/widgets/class-offer-calc-widget.php');
+
+//includes shortcode file
+require_once ( OFFER_CALC_DIR . '/includes/class-offer-calc-shortcodes.php');
+$offer_calc_shortcodes = new Offer_Calc_Shortcodes();
+$offer_calc_shortcodes->add_hooks();
+
+//include the main class file for metabox
+require_once ( OFFER_CALC_METABOX_DIR . '/class-offer-calc-meta-box.php' );
+
+add_action( 'init', 'offer_calc_loag_meta' );
+
+function offer_calc_loag_meta() {
+	//Metabox file to handle metaboxes
+	include_once( OFFER_CALC_METABOX_DIR . '/offer-calc-meta-box.php' );
+}
+
+//includes admin pages
+require_once( OFFER_CALC_ADMIN . '/class-offer-calc-admin.php');
+$offer_calc_admin = new Offer_Calc_Admin_Pages();
+$offer_calc_admin->add_hooks();
+
+?>
