@@ -1,14 +1,12 @@
-﻿=== Offer Calc ===
-Contributors: devrix, nofearinc
-Tags: offer, offers, calculator, calculation, cost, administration, form, plugin, price, request, shortcode, shortcodes, website, widget
-Requires at least: 3.0
-Tested up to: 4.1.1
-Stable tag: 1.1
-License: GPLv2 or later
+Offer-Calc
+==========
+
+Offer Calc is a simple plugin letting your site visitors to calculate your services at final cost.
 
 Offer Calc is a simple plugin letting your site visitors to calculate your services at final cost. 
 
-== Description ==
+Description
+----------
 
 The new Offer Calc 1.0 is here!
 
@@ -20,7 +18,8 @@ Offer Calc is a simple plugin letting your site visitors to calculate your servi
 * label for total cost
 * at the bottom - total sum of all labels.
 
-== Installation ==
+Installation
+----------
 
 Upload the Offer Calc plugin to your blog and activate - that's all.
 
@@ -28,7 +27,8 @@ If you need a shortcode usage, use this snippet:
 
 [ofc_shortcode offer_slug="YOUR-FORM-SLUG-HERE"]
 
-== Screenshots ==
+Screenshots
+----------
 
 1. Offer Calc
 2. Add New Offer
@@ -37,7 +37,8 @@ If you need a shortcode usage, use this snippet:
 5. Offer Calc Widget
 6. Offer Cacl Help Page
 
-== Changelog ==
+Changelog
+----------
 
 v1.1
 (2015/03/23)
@@ -72,6 +73,7 @@ Created the Widget
 v0.3a
 Adding to database form data
 
-== Credits ==
+Credits
+----------
 Serbian Translation
 - Ogi Djuraskovic, http://firstsiteguide.com/
