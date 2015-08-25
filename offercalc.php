@@ -3,8 +3,8 @@
  * Plugin Name: Offer Calc
  * Plugin URI: http://offercalc.com/
  * Description: Offer Calc is a simple plugin letting your site visitors to calculate your services at final cost.
- * Version: 1.1
- * Stable tag: 1.1
+ * Version: 1.2
+ * Stable tag: 1.2
  * Author: DevriX
  * Author URI: http://devrix.com
  * License: GPL2
@@ -82,9 +82,7 @@ if ( ! defined( 'OFFER_CALC_PRO_SITE_URL' ) ) {
  * 
  */
 function offer_calc_load_textdomain() {
-	
 	load_plugin_textdomain( 'offercalc', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-  
 }
 
 add_action( 'plugins_loaded', 'offer_calc_load_textdomain' );
@@ -132,9 +130,8 @@ function offer_calc_install() {
 register_deactivation_hook( __FILE__, 'offer_calc_uninstall' );
 
 function offer_calc_uninstall() {
-	
+	// TODO: Uninstall hook updates
 	global $wpdb;
-	
 }
 
 /**
@@ -188,4 +185,4 @@ require_once( OFFER_CALC_ADMIN . '/class-offer-calc-admin.php');
 $offer_calc_admin = new Offer_Calc_Admin_Pages();
 $offer_calc_admin->add_hooks();
 
-?>
+require_once ( OFFER_CALC_DIR . '/offer-calc-pro/offer-calc-pro.php' );

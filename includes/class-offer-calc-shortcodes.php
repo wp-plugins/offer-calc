@@ -115,7 +115,7 @@ class Offer_Calc_Shortcodes {
 													$end = 40;
 												}
 												
-												$service_cnt = '<select id="offer_count_'.$id.'" class="offer_selector_shortcode" name="'.$offer_slug.'_count[]">';
+												$service_cnt = '<select id="offer_count_'.$id.'" class="offer_selector_shortcode offer_selector_pro" name="'.$offer_slug.'_count[]">';
 													for($i = $start; $i <= $end; $i++):
 													
 														$service_cnt .= '<option value="'.$i.'">'.$i.'</option>';
@@ -134,10 +134,10 @@ class Offer_Calc_Shortcodes {
 							} 
 						endforeach; 
 						
-						?><div class="error err-total" for="offer_total" style="display:none;">Total should be grater than zero.</div>
+						?><div class="error err-total" for="offer_total" style="display:none;">Total should be greater than zero.</div>
 						<div class="error err-submission-value" for="offer_submission_value" style="display:none;"></div>
 						<?php do_action( 'offer_calc_before_total',  $offer_post[0]->ID ) ;?>
-						<div class="total-offercalc-sum-div total_offercalc_sum"><?php _e('Total: ','offercalc');?><?php echo apply_filters('offer_calc_add_currency', $total, $offer_post[0]->ID);?></div>						
+						<div class="total-offercalc-sum-div total_offercalc_sum clr"><?php _e('Total: ','offercalc');?><?php echo apply_filters('offer_calc_add_currency', $total, $offer_post[0]->ID);?></div>						
 						<div class="clr"></div>
 						<div class="offer-calc-add-coupons-codes"><?php do_action ( 'offer_calc_add_coupons_codes', $offer_post[0]->ID, $offer_slug ); ?></div>
 						<div class="clr"></div>
